@@ -1,0 +1,21 @@
+{
+  "name": "City of Forest – Water Well Management",
+  "short_name": "Well Mgmt",
+  "description": "Water well runtime, meter, and maintenance tracker for City of Forest, MS",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#0a1628",
+  "theme_color": "#0a1628",
+  "icons": [
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
