@@ -1,57 +1,21 @@
-function renderBackup(){
-  return `
-  <div class="grid" style="gap:20px;">
-    <section class="card soft">
-      <h2 class="section-title">Backup</h2>
-      <p class="section-subtitle">Export or restore local data for this device.</p>
-    </section>
-
-    <section class="card">
-      <h2>Backup / Restore</h2>
-      <div class="actions">
-        <button class="btn btn-primary" onclick="exportBackup()">Export Backup</button>
-      </div>
-      <div style="margin-top:18px;">
-        <label for="backup-file">Restore backup file</label>
-        <input id="backup-file" type="file" onchange="importBackup(event)">
-      </div>
-      <div class="inline-note">Restoring a backup will overwrite saved local data keys with the imported file contents.</div>
-    </section>
-  </div>
-  `
-}
-
-function exportBackup(){
-  const data={}
-
-  for(let i=0;i<localStorage.length;i++){
-    const k=localStorage.key(i)
-    data[k]=localStorage.getItem(k)
-  }
-
-  const blob=new Blob([JSON.stringify(data,null,2)],{type:"application/json"})
-  const a=document.createElement("a")
-  a.href=URL.createObjectURL(blob)
-  a.download="well_backup.json"
-  a.click()
-}
-
-function importBackup(e){
-  const file=e.target.files[0]
-  if(!file) return
-
-  const reader=new FileReader()
-  reader.onload=function(){
-    try{
-      const data=JSON.parse(reader.result)
-      for(const k in data){
-        localStorage.setItem(k,data[k])
-      }
-      alert("Backup restored")
-      render()
-    }catch{
-      alert("Backup file could not be read.")
+{
+  "name": "City of Forest – Water Well Management",
+  "short_name": "Well Mgmt",
+  "description": "Water well runtime, meter, and maintenance tracker for City of Forest, MS",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#0a1628",
+  "theme_color": "#0a1628",
+  "icons": [
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
     }
-  }
-  reader.readAsText(file)
+  ]
 }

@@ -1,45 +1,49 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Municipal Water Well Manager v3</title>
-<link rel="manifest" href="manifest.json">
-<meta name="theme-color" content="#0f172a">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/styles.css">
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-</head>
-<body>
-<div class="shell">
-<header class="topbar">
-  <div>
-    <div class="eyebrow">Municipal Utility</div>
-    <h1>Water Well Manager</h1>
-    <p>Simple tracking for runtime, production, reports, and backups.</p>
-  </div>
-  <div class="topbar-badge">v3.1</div>
-</header>
+# City of Forest – Water Well Management App
 
-<nav class="nav-tabs" aria-label="Primary navigation">
-  <button id="nav-dashboard" onclick="showPage('dashboard')">Dashboard</button>
-  <button id="nav-wells" onclick="showPage('wells')">Wells</button>
-  <button id="nav-charts" onclick="showPage('charts')">Charts</button>
-  <button id="nav-reports" onclick="showPage('reports')">Reports</button>
-  <button id="nav-backup" onclick="showPage('backup')">Backup</button>
-</nav>
+A mobile-friendly Progressive Web App (PWA) for the City of Forest, Mississippi to track water well runtime, meter readings, gallons, and maintenance notes.
 
-<main id="app"></main>
-</div>
+## Features
 
-<script src="js/storage.js"></script>
-<script src="js/wells.js"></script>
-<script src="js/ui.js"></script>
-<script src="js/charts.js"></script>
-<script src="js/reports.js"></script>
-<script src="js/backup.js"></script>
-<script src="js/app.js"></script>
-</body>
-</html>
+- **6 Well Locations**: Wal-Mart Well, Trenton Rd Well, Cedar Street Well, RG Well, Oak Park Well, Hwy 80 Well
+- **Runtime & Meter Tracking**: Log run hours, start/end meter readings; gallons through meter calculated automatically
+- **Time-Period Filtering**: Filter records by 1, 3, 6, or 12 months
+- **Maintenance Notes**: Per-well maintenance log with timestamps
+- **General Notes**: City-wide maintenance notes screen
+- **CSV Export**: Export runtime data (by period), maintenance notes, or a full all-wells report
+- **All data timestamped** automatically on entry
+- **Works offline** – all data stored locally in the browser
+
+## How to Use
+
+### Option A – GitHub Pages (Recommended)
+1. Fork or clone this repo
+2. Go to **Settings → Pages** → set source to `main` branch, root `/`
+3. Your app will be live at `https://YOUR-USERNAME.github.io/YOUR-REPO-NAME/`
+4. On your phone, open that URL in Chrome (Android) or Safari (iPhone) → tap **"Add to Home Screen"** to install as an app
+
+### Option B – Run Locally
+Just open `index.html` in any modern browser. No server or install needed.
+
+## File Structure
+
+```
+index.html      ← The entire app (single file)
+manifest.json   ← PWA manifest for "Add to Home Screen"
+README.md       ← This file
+```
+
+## Data Storage
+
+All data is stored in your browser's **localStorage** — it stays on the device and never leaves. To back up data, use the **Export** tab inside each well to download CSVs.
+
+## Export Formats
+
+| Export | Contents |
+|--------|----------|
+| Runtime CSV | Date, run hours, start meter, end meter, gallons, notes |
+| Maintenance CSV | Date and maintenance note per well |
+| Full Report CSV | All wells, all types, sorted by date |
+| General Notes CSV | All general maintenance notes |
+
+## City of Forest, MS
+Public Works / Water Department
