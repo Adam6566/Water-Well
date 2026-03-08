@@ -1,42 +1,38 @@
-
 function renderReports(){
+  const totals=getSystemTotals()
 
-return `
-<div class="card">
-<h2>Monthly Report Export</h2>
+  return `
+  <div class="grid" style="gap:20px;">
+    <section class="card soft">
+      <h2 class="section-title">Reports</h2>
+      <p class="section-subtitle">Export a simple CSV file for monthly reporting or archiving.</p>
+    </section>
 
-<button onclick="exportMonthly()">Download CSV</button>
-
-</div>
-`
+    <section class="card">
+      <h2>Monthly report export</h2>
+      <p class="muted">Current totals: ${formatNumber(totals.totalGallons)} gallons and ${formatNumber(totals.totalHours)} runtime hours.</p>
+      <div class="actions">
+        <button class="btn btn-primary" onclick="exportMonthly()">Download CSV</button>
+      </div>
+    </section>
+  </div>
+  `
 }
 
 function exportMonthly(){
+  const rows=[["Well","Date","Hours","Gallons"]]
 
-const rows=[["Well","Date","Hours","Gallons"]]
+  WELLS.forEach(w=>{
+    const records=getWellRecords(w.id)
+    records.forEach(x=>{
+      rows.push([w.name,x.timestamp,x.hours,x.meter])
+    })
+  })
 
-WELLS.forEach(w=>{
-
-const r=load("rt_"+w.id)
-
-r.forEach(x=>{
-
-rows.push([w.name,x.timestamp,x.hours,x.meter])
-
-})
-
-})
-
-let csv=rows.map(r=>r.join(",")).join("\n")
-
-const blob=new Blob([csv])
-
-const a=document.createElement("a")
-
-a.href=URL.createObjectURL(blob)
-
-a.download="monthly_well_report.csv"
-
-a.click()
-
+  const csv=rows.map(r=>r.join(",")).join("\n")
+  const blob=new Blob([csv],{type:"text/csv;charset=utf-8;"})
+  const a=document.createElement("a")
+  a.href=URL.createObjectURL(blob)
+  a.download="monthly_well_report.csv"
+  a.click()
 }
