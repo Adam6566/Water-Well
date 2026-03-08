@@ -35,6 +35,9 @@ function render(){
 updateNav()
 render()
 
-if("serviceWorker" in navigator){
-  navigator.serviceWorker.register("service-worker.js")
+// Disable old service worker caching issues and remove any previously registered workers.
+if ("serviceWorker" in navigator) {
+  navigator.serviceWorker.getRegistrations().then(registrations => {
+    registrations.forEach(reg => reg.unregister())
+  })
 }

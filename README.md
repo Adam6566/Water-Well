@@ -20,7 +20,7 @@
     <h1>Water Well Manager</h1>
     <p>Simple tracking for runtime, production, reports, and backups.</p>
   </div>
-  <div class="topbar-badge">v3</div>
+  <div class="topbar-badge">v3.1</div>
 </header>
 
 <nav class="nav-tabs" aria-label="Primary navigation">
