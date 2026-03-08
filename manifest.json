@@ -1,21 +1,64 @@
-{
-  "name": "City of Forest – Water Well Management",
-  "short_name": "Well Mgmt",
-  "description": "Water well runtime, meter, and maintenance tracker for City of Forest, MS",
-  "start_url": ".",
-  "display": "standalone",
-  "background_color": "#0a1628",
-  "theme_color": "#0a1628",
-  "icons": [
-    {
-      "src": "icon-192.png",
-      "sizes": "192x192",
-      "type": "image/png"
-    },
-    {
-      "src": "icon-512.png",
-      "sizes": "512x512",
-      "type": "image/png"
-    }
-  ]
+
+function renderBackup(){
+
+return `
+<div class="card">
+<h2>Backup / Restore</h2>
+
+<button onclick="exportBackup()">Export Backup</button>
+
+<br><br>
+
+<input type="file" onchange="importBackup(event)">
+
+</div>
+`
+}
+
+function exportBackup(){
+
+const data={}
+
+for(let i=0;i<localStorage.length;i++){
+
+const k=localStorage.key(i)
+
+data[k]=localStorage.getItem(k)
+
+}
+
+const blob=new Blob([JSON.stringify(data)])
+
+const a=document.createElement("a")
+
+a.href=URL.createObjectURL(blob)
+
+a.download="well_backup.json"
+
+a.click()
+
+}
+
+function importBackup(e){
+
+const file=e.target.files[0]
+
+const reader=new FileReader()
+
+reader.onload=function(){
+
+const data=JSON.parse(reader.result)
+
+for(const k in data){
+
+localStorage.setItem(k,data[k])
+
+}
+
+alert("Backup restored")
+
+}
+
+reader.readAsText(file)
+
 }
